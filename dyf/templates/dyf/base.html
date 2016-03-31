@@ -9,12 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="{% static 'dyf/css/style.css' %}" />
+    <script src="{% static 'dyf/js/yaml.js' %}"></script>
 
     <title>
         {% block pageTitle %}HomePage{% endblock %}
     </title>
 </head>
 <body>
+
     <div id="full-width-cont">
         <div id="filler"></div>
         <div id="header">
@@ -48,7 +50,9 @@
                 {% block content %} {% endblock %}
             </div>
         </div>
+        <script src="{% static 'dyf/js/dnd.js' %}"></script>
 
+        {% block sc %} {% endblock %}
 
         <div id="footer">
             <div id="footer-container">
@@ -57,7 +61,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </body>
 </html>
