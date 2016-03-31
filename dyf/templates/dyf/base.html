@@ -1,0 +1,63 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %} {% endblock %}
+    <meta charset="UTF-8">
+    <meta name="keywords" content="Google, Summer, of, Code, GSoC, 2016, syslog, balabit, ng, syslog-ng">
+    <meta name="author" content="Ács Raymund">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{% static 'dyf/css/style.css' %}" />
+
+    <title>
+        {% block pageTitle %}HomePage{% endblock %}
+    </title>
+</head>
+<body>
+    <div id="full-width-cont">
+        <div id="filler"></div>
+        <div id="header">
+            <div id="header-container">
+                <div id="logo">
+                    <a href="{% url 'dyf:indexUrl' %}">
+                        <span class="light logo">DragYourFruit</span>
+                    </a>
+                </div>
+                <div id="navigation">
+                    <ul>
+                        <li>
+                            <a href="{% url 'dyf:indexUrl' %}">Home</a>
+                        </li>
+                        <li>
+                            <a href="https://syslog-ng.org/">Syslog-ng website</a>
+                        </li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        <div id="content">
+            <div id="content-container">
+                {% block content %} {% endblock %}
+            </div>
+        </div>
+
+
+        <div id="footer">
+            <div id="footer-container">
+                <div id="copyright">
+                    <span class="white light centered">© 2016 Ács Raymund. All rights reserved.</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
