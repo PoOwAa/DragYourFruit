@@ -39,6 +39,29 @@ function ymlHandler(fruits) {
         a.innerHTML = fruit;
     }
 
+    /*
+     //fruits
+     for (var fruit in fruits) {
+     console.log(fruit);
+     fruitNames.push(fruit);
+
+     //properties
+     for (var property in fruits[fruit]) {
+     console.log(property);
+     //fruitNames[i].push(property);
+
+     //values
+     for (var value in fruits[fruit][property]) {
+     console.log(fruits[fruit][property][value]);
+     //fruitNames[i][j].push(fruits[fruit][property][value]);
+     j++;
+     }
+     i++;
+     }
+
+     }
+     */
+
     console.log(fruits);
 
     canvasInit();

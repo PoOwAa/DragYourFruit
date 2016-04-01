@@ -31,18 +31,15 @@ Shape.prototype.draw = function(ctx) {
     }
 
     for (var prop in this.property) {
-        ctx.fillText(this.property[prop], this.x, this.y+rowh*i);
+        ctx.fillText(this.property[prop] + ': ', this.x, this.y+rowh*i);
         //console.log(this.property[prop]);
-        if (maxw < ctx.measureText(this.property[prop]).width) {
-            maxw = ctx.measureText(this.property[prop]).width;
-        }
-        i++;
+        //i++;
 
         for (var val in this.value) {
-            ctx.fillText(this.value[prop], this.x, this.y+rowh*i);
+            ctx.fillText(this.value[prop], this.x+ctx.measureText(this.property[prop]+ ': ').width, this.y+rowh*i);
             //console.log(this.value[prop]);
-            if (maxw < ctx.measureText(this.value[prop]).width) {
-                maxw = ctx.measureText(this.value[prop]).width;
+            if (maxw < ctx.measureText(this.value[prop]).width + ctx.measureText(this.property[prop]+ ': ').width) {
+                maxw = ctx.measureText(this.value[prop]).width + ctx.measureText(this.property[prop]+ ': ').width;
             }
             i++;
             break;
@@ -64,6 +61,9 @@ Shape.prototype.contains = function(mx, my) {
     return  (this.x <= mx) && (this.x + this.w >= mx) &&
         (this.y <= my) && (this.y + this.h >= my);
 }
+
+
+
 
 function CanvasState(canvas) {
     // **** First some setup! ****
@@ -130,9 +130,46 @@ function CanvasState(canvas) {
                     console.log("Right click on Object");
                     console.log(shapes[i]);
 
-                    //TODO
 
-                    //$('#fruitCanvas').contextMenu($(".contextMenu"),{triggerOn:'contextmenu'});
+
+                    // generate HTML code
+                    var mt = $id('menuTest');
+
+                    var menuUl = document.createElement('ul');
+                    menuUl.setAttribute('class', 'contextMenu');
+                    mt.appendChild(menuUl);
+                    var editLi = document.createElement('li');
+                    menuUl.appendChild(editLi);
+                    editLi.innerHTML = "Edit";
+
+                    var propUl = document.createElement('ul');
+                    editLi.appendChild(propUl);
+
+                    //properties
+                    for (var property in globalFruits[shapes[i].name]) {
+                        //console.log(property);
+
+                        //add property menu
+                        var tmpli = propUl.appendChild(document.createElement('li'));
+                        tmpli.innerHTML = property;
+
+                        var tmpul = tmpli.appendChild(document.createElement('ul'));
+                        //values
+                        for (var value in globalFruits[shapes[i].name][property]) {
+                            //add value menu
+                            var tmpliValue = tmpul.appendChild(document.createElement('li'));
+                            tmpliValue.setAttribute('onClick', 'CanvasState.setValue(' + i + ', "' + shapes[i].property.indexOf(property) + '", "' + globalFruits[shapes[i].name][property][value] + '")');
+                            console.log('CanvasState.setValue(' + i + ', ' + shapes[i].property.indexOf(property) + ', "' + globalFruits[shapes[i].name][property][value] + '")');
+
+                            tmpliValue.innerHTML = globalFruits[shapes[i].name][property][value];
+
+
+                        }
+                    }
+
+
+
+                    $('#fruitCanvas').contextMenu('menu', $('.contextMenu'),{triggerOn:'contextmenu'});
                     //$('#fruitCanvas').contextMenu('destroy');
                 }
             }
@@ -182,10 +219,19 @@ function CanvasState(canvas) {
         }
 
         myState.addShape(minifruit);
-        console.log(minifruit);
+        //console.log(minifruit);
 
     };
 
+
+    // Set value of Shape
+    CanvasState.setValue = function(i, property, value) {
+        var shapes = myState.shapes;
+        //console.log(shapes[i].value);
+        console.log(shapes[i].value[property]);
+        shapes[i].value[property] = value;
+        myState.valid = false;
+    }
 
 
 
