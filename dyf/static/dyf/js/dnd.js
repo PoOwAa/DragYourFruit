@@ -29,69 +29,11 @@
 
     //var fruitNames = createNDimArray(3);
 
-    // getElementById
-    function $id(id) {
-        return document.getElementById(id);
-    }
-
     function fruitOut() {
         console.log(fruitNames);
     }
 
-    function ymlHandler(fruits) {
-        /*console.log(fruits);*/
-
-
-        //fruitMenu
-        var fm = $id("fruitMenu");
-        var section = document.createElement('section');
-        section.setAttribute('id', 'fm');
-
-        var ul = document.createElement('ul');
-
-        fm.appendChild(section);
-        section.appendChild(ul);
-
-
-        for (var fruit in fruits) {
-
-            var li = document.createElement('li');
-            ul.appendChild(li);
-
-            var a = document.createElement('a');
-            li.appendChild(a);
-
-            a.setAttribute('href','#');
-            a.setAttribute('value', fruit);
-
-            a.innerHTML = fruit;
-        }
-
-        /*
-        //fruits
-        for (var fruit in fruits) {
-            console.log(fruit);
-            fruitNames.push(fruit);
-
-            //properties
-            for (var property in fruits[fruit]) {
-                console.log(property);
-                //fruitNames[i].push(property);
-
-                //values
-                for (var value in fruits[fruit][property]) {
-                    console.log(fruits[fruit][property][value]);
-                    //fruitNames[i][j].push(fruits[fruit][property][value]);
-                    j++;
-                }
-                i++;
-            }
-
-        }
-        */
-        console.log(fruits.apple);
-        console.log(fruits);
-    }
+    /*YamlHandler*/
 
     //file drag hover style
     function FileDragHover(e) {
@@ -134,9 +76,9 @@
             reader.onload = function(e) {
                 var yml,
                     //json,
-                    data;
+                    fruits;
                 yml = e.target.result;
-                data = YAML.parse(yml);
+                fruits = YAML.parse(yml);
                 /*
                 json = JSON.stringify(data);
                 console.log(json);
@@ -144,15 +86,14 @@
                 console.log(data);
                 */
 
-                ymlHandler(data);
+
+                ymlHandler(fruits);
             }
             reader.readAsText(file);
             console.log("Yaml file opened: " + file.name);
         //}
 
     }
-
-
 
     // initialize
     function Init() {
