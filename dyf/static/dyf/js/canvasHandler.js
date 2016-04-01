@@ -1,3 +1,6 @@
+/**
+ * Created by raymund on 2016.03.31..
+ */
 // Constructor for Shape objects to hold data for all drawn objects.
 // For now they will just be defined as rectangles.
 function Shape(x, y, name, property, value, w, h, fill) {
@@ -108,16 +111,44 @@ function CanvasState(canvas) {
         var l = shapes.length;
         for (var i = l-1; i >= 0; i--) {
             if (shapes[i].contains(mx, my)) {
-                var mySel = shapes[i];
-                // Keep track of where in the object we clicked
-                // so we can move it smoothly (see mousemove)
-                myState.dragoffx = mx - mySel.x;
-                myState.dragoffy = my - mySel.y;
-                myState.dragging = true;
-                myState.selection = mySel;
-                myState.valid = false;
-                //console.log(shapes[i].x);
-                return;
+                // Left click, drag
+                if (e.which == 1) {
+                    var mySel = shapes[i];
+                    // Keep track of where in the object we clicked
+                    // so we can move it smoothly (see mousemove)
+                    myState.dragoffx = mx - mySel.x;
+                    myState.dragoffy = my - mySel.y;
+                    myState.dragging = true;
+                    myState.selection = mySel;
+                    myState.valid = false;
+                    //console.log(shapes[i].x);
+                    return;
+                }
+                // Right click, contextMenu
+                if (e.which == 3) {
+                    var contextMenu = [{
+                        name: 'create',
+                        title: 'create button',
+                        fun: function () {
+                            alert('i am add button')
+                        }
+                    }, {
+                        name: 'update',
+                        title: 'update button',
+                        fun: function () {
+                            alert('i am update button')
+                        }
+                    }, {
+                        name: 'delete',
+                        title: 'delete button',
+                        fun: function () {
+                            alert('i am delete button')
+                        }
+                    }];
+                    $('#fruitCanvas').contextMenu(contextMenu);
+                    e.preventDefault();
+                }
+
             }
         }
         // havent returned means we have failed to select anything.
@@ -126,7 +157,10 @@ function CanvasState(canvas) {
             myState.selection = null;
             myState.valid = false; // Need to clear the old selection border
         }
-    }, true);
+    }, false);
+
+
+
     canvas.addEventListener('mousemove', function(e) {
         if (myState.dragging){
             var mouse = myState.getMouse(e);
@@ -162,6 +196,9 @@ function CanvasState(canvas) {
         console.log(minifruit);
 
     };
+
+
+
 
     // **** Options! ****
 
