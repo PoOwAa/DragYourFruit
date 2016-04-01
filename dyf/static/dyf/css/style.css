@@ -157,6 +157,10 @@ body {
     min-height: 150px;
 }
 
+.greenbg {
+    background-color: #1BBC9B;
+}
+
 #fruitMenu {
     width: 100%;
 }
@@ -166,6 +170,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    background-color: #1BBC9B;
 }
 
 #fm > ul > li {
@@ -176,6 +181,16 @@ body {
     display: block;
     text-align: center;
     padding: 14px 16px;
+    color: white;
+    text-decoration: none;
+}
+
+#fm > ul > li a:hover {
+    background-color: #16A086;
+}
+
+#fm > ul > li a:hover:not(.active) {
+    background-color: #16A086;
 }
 
 #hiddenMessage {

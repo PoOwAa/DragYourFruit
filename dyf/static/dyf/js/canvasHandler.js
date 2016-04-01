@@ -111,6 +111,7 @@ function CanvasState(canvas) {
         var l = shapes.length;
         for (var i = l-1; i >= 0; i--) {
             if (shapes[i].contains(mx, my)) {
+                console.log("Contains");
                 // Left click, drag
                 if (e.which == 1) {
                     var mySel = shapes[i];
@@ -126,30 +127,18 @@ function CanvasState(canvas) {
                 }
                 // Right click, contextMenu
                 if (e.which == 3) {
-                    var contextMenu = [{
-                        name: 'create',
-                        title: 'create button',
-                        fun: function () {
-                            alert('i am add button')
-                        }
-                    }, {
-                        name: 'update',
-                        title: 'update button',
-                        fun: function () {
-                            alert('i am update button')
-                        }
-                    }, {
-                        name: 'delete',
-                        title: 'delete button',
-                        fun: function () {
-                            alert('i am delete button')
-                        }
-                    }];
-                    $('#fruitCanvas').contextMenu(contextMenu);
-                    e.preventDefault();
-                }
+                    console.log("Right click on Object");
+                    console.log(shapes[i]);
 
+                    //TODO
+
+                    //$('#fruitCanvas').contextMenu($(".contextMenu"),{triggerOn:'contextmenu'});
+                    //$('#fruitCanvas').contextMenu('destroy');
+                }
             }
+            //remove
+
+
         }
         // havent returned means we have failed to select anything.
         // If there was an object selected, we deselect it
