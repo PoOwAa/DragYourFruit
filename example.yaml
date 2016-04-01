@@ -1,0 +1,15 @@
+apple:
+  color: 
+    - red
+    - green
+    - yellow
+  taste: 
+    - sweet
+    - acidulated
+pear: 
+  shape: 
+    - spherical
+    - longish
+  taste: 
+    - sweet
+    - acidulated
